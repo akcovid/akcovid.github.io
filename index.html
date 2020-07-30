@@ -1,1 +1,401 @@
-Hello World akcovid.info
+
+<html>
+<title>Alaska Covid-19 Testing Locations</title>
+
+<head>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70817-22"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70817-22');
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script> -->
+
+
+<!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+ <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+ <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/fc-3.3.1/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/rr-1.2.7/sc-2.0.2/sp-1.1.1/sl-1.3.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/fc-3.3.1/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/rr-1.2.7/sc-2.0.2/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
+ -->
+<style>
+
+   body {font-family: sans-serif;}
+   td {
+    vertical-align: top;
+   }
+
+   h1 {
+    color:blue;
+    background-color: gold;
+    display:block;
+    padding:10px;
+   }
+
+   .city h2 {
+    color: blue;
+    border:1px solid blue;
+    padding:10px;
+    display:block;
+    background-color: blue;
+    color:gold;
+   }
+
+   .clinic {
+    margin-left:10px;
+    padding:10px;
+    border:1px dotted blue;
+    max-width: 1000px;
+   }
+
+
+
+   #citylinks a {
+    margin-right:15px;
+   
+      }
+
+   #citylinks {
+    display: none;
+    max-width:600px;
+   }
+
+   #menubox, #menu {
+    font-size:1.5em;
+
+   }
+
+
+   .about {
+    padding-bottom:1em;
+   
+   }
+/*   .clinic * {
+   
+   display:none;
+   }
+
+    .clinic h3 {
+    color: red;
+    visibility: visible;
+    display:inline;
+   }
+
+    address{
+    display: inline;
+
+   }*/
+
+</style> 
+<script>
+    function arrayToTable(tableData) {
+        var table = $('<table id="myTable" class="stripe"><thead></thead><tbody></tbody></table>');
+
+        $.fn.child = function(s) {
+            return $(this).children(s)[0];
+        };
+
+        var thead = $(table).children('thead');
+        var tbody = $(table).children('tbody');
+        // console.log(table);
+        // console.log(thead);
+        // console.log(tbody);
+        $(tableData).each(function (i, rowData) {
+               var row = $('<tr></tr>');  
+            
+            $(rowData).each(function (j, cellData) {
+                if (cellData.length == 0){
+
+                    var cData = cellData ;
+                } else {
+                    var cData = cellData ;
+                }
+
+
+                        if(i==0){
+              row.append($('<th>'+cData+'</th>'));
+            } else {
+               row.append($('<td>'+cData+'</td>'));
+            }
+
+
+
+            });
+
+              if(i==0){
+            thead.append(row);
+        } else {
+            if (i != tableData.length -1){
+                    tbody.append(row);
+            }
+        //console.log(i,tableData.length);
+        }
+        });
+        return table;
+    }
+
+
+           
+           
+           
+
+</script>
+
+</head>
+
+<body>
+
+
+<div class="about">
+
+<h1>Covid-19 Testing Locations in Alaska</h1>
+    About this site: The State of Alaska maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
+    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. If you have feedback please <a href="mailto:jared.chandler@gmail.com">send email</a>. 
+</div>
+
+<div id="citylinks">
+    <h2>Choose your community<h2>
+</div>
+
+<div id="menubox">
+    View Testing Location For:  <select id="menu">
+        <option>Choose Your Community</option>
+    </select>
+</div>
+
+<script>
+
+    $(function() {
+    $("#menu").change(function() {
+        location.hash = "" + $(this).find("option:selected")[0].value;
+    });
+});
+
+
+var template = `<div>
+<h2 class='site'>Name of Site</h2>
+
+
+
+<div>Phone: Phone Number</div>
+<div>Email: Email</div>
+
+<div>Address: </div>
+<div>City:</div>
+<div>Zip: </div>
+
+<div> Hours </div>
+
+<div><span>Monday</span> open hours </div>
+<div><span>Tuesday</span> open hours </div>
+<div><span>Wednesday</span> open hours </div>
+<div><span>Thursday</span> open hours </div>
+<div><span>Friday</span> open hours </div>
+<div><span>Saturday</span> open hours </div>
+<div><span>Sunday</span> open hours </div>
+
+
+
+<div>Notes: </div>
+<div>Costs</div>
+
+</div>
+`;
+
+
+function keys(obj)
+{
+    var keys = [];
+
+    for(var key in obj)
+    {
+        if(obj.hasOwnProperty(key))
+        {
+            keys.push(key);
+        }
+    }
+
+    return keys;
+}
+
+function fillTemplate(fields){
+
+function lu(f){
+    if (fields[f] == null || fields[f]==undefined){
+        return '';
+    } else {
+        return fields[f].trim();
+    }
+}
+
+function email(x){
+    if (x != ''){
+        return '<a href="mailto:'+x+'">'+x+'</a>';
+    } else {
+        return '';
+    }
+}
+
+function tel(x){
+    if (x != ''){
+        return '<a href="tel:'+x+'">'+x+'</a>';
+    } else {
+        return '';
+    }
+}
+
+var template = `<div class='clinic'>
+<h3 >`+lu('name_of_collection_site')+`</h3>
+
+
+
+<div>Phone: `+tel(lu('public_contact_number_if_availa'))+`</div>
+<div>Email: `+email(lu('public_e_mail_for_site_informat'))+`</div>
+
+<div>Address: <a href="https://www.google.com/maps/place/`+lu('address')+` `+lu('city')+` AK `+lu('zipcode')+`">`+lu('address')+` `+lu('city')+` AK `+lu('zipcode')+`</a></div>
+<br/>
+<div><em>Hours</em></div>
+
+<div><span>Monday:</span> `+lu('monday')+` `+lu('hours_open_monday')+`</div>
+<div><span>Tuesday:</span> `+lu('tuesday')+` `+lu('hours_open_tuesday')+`</div>
+<div><span>Wednesday:</span> `+lu('wednesday')+` `+lu('hours_open_wednesday')+`</div>
+<div><span>Thursday:</span> `+lu('thursday')+` `+lu('hours_open_thursday')+`</div>
+<div><span>Friday:</span> `+lu('friday')+` `+lu('hours_open_friday')+`</div>
+<div><span>Saturday:</span> `+lu('saturday')+` `+lu('hours_open_saturday')+`</div>
+<div><span>Sunday:</span> `+lu('sunday')+` `+lu('hours_open_sunday')+`</div>
+<br/>
+<div>Medical Referral Needed: `+lu('medical_referral_needed')+`</div>
+<div>Accepts Voucher: `+lu('AcceptsVoucher')+`</div>
+<br/>
+<div>Notes: `+lu('additional_notes')+`</div>
+<div>Costs: `+lu('costs')+` `+lu('costs_other')+`</div>
+
+</div>
+`;  
+
+
+
+    return template;
+}
+
+function makeClinic(clinic){
+    
+    var fields = keys(clinic).sort();
+    var clinicElement = $('<div class="clinic"><h3>'+clinic['name_of_collection_site']+'</h3></div>');
+    var datas = []
+    //console.log(fields);
+    for (var i =0;i<fields.length;i++){
+        var fname = fields[i];
+        var val = clinic[fname];
+        if (val != null){
+              var el  = '<div>'+fname+':'+val+'</div>';
+              datas.push(el);
+        }
+     
+
+        //var el = 
+        //$("hello").appendTo(clinicElement);
+        
+    }
+
+    //datas.appendTo(clinicElement);
+    var fl = $('<div />',{html: datas.join("")});
+    fl.appendTo(clinicElement);
+    //clinicElement = $(template);
+    var t = $(fillTemplate(clinic));
+    //t.appendTo(clinicElement);
+    //return clinicElement;
+    return t;
+
+}
+
+
+function makeCity(city,xs){
+    var links = $('<a name="'+city+'" /><a name="'+city.toLowerCase()+'"/>');
+    var link = $('<a href="#'+city.toLowerCase()+'">'+city+'</a>');
+    var option = $('<option value="'+city.toLowerCase()+'">'+city+'</option>');
+    option.appendTo($("#menu")[0]);
+    link.appendTo($('#citylinks')[0]);
+    var cityElement = $('<div class="City"><h2>'+city+'</h2></div>');
+    
+    //console.log(xs);
+    for (var i = 0;i<xs.length;i++){
+        clinic = xs[i];
+
+        var clinicElement = makeClinic(clinic);
+        clinicElement.appendTo(cityElement);
+
+    }
+    links.appendTo("body");
+    cityElement.appendTo("body");
+}
+
+
+function clinic(cities,fields,geo){
+    //console.log(geo.x,geo.y);
+    var city = fields.city;
+    if (city == null){
+        city = 'Unknown';
+    } else {
+
+        city = city.trim();
+    }
+    //console.log('city '+city);
+    if (cities[city]==undefined){
+        cities[city] = [];
+    }
+
+    fields.x = geo.x;
+    fields.y = geo.y;
+
+    cities[city].push(fields);
+};
+ 
+var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=name_of_collection_site,address,city,zipcode,sunday,hours_open,monday,hours_open_monday,tuesday,hours_open_tuesday,wednesday,hours_open_wednesday,thursday,hours_open_thursday,friday,hours_open_friday,saturday,hours_open_saturday,public_contact_number_if_availa,public_e_mail_for_site_informat,medical_referral_needed,cost,cost_other,rapid_testing,RapidCapacity,RapidCapUKnw,urgent_testing,UrgentCapacity,UrgentCapUknw,private_testing_collection,PrivateCapacity,PrivateCapUknw,additional_notes,AcceptsVoucher&outSR=4326&f=json';
+c = $.getJSON( url, function( data ) {
+  var cities = {};
+  var items = [];
+  $.each( data.features, function( key, val ) {
+    //console.log(val.attributes);
+    clinic(cities,val.attributes,val.geometry);
+    //items.push( "<li id='" + key + "'>" +key+  ':'+ val.attributes + "</li>" );
+  });
+ 
+  // $( "<ul/>", {
+  //   "class": "my-new-list",
+  //   html: items.join( "" )
+  // }).appendTo( "body" );
+var cities_sorted = keys(cities).sort();
+//console.log(cities_sorted);
+for (var i = 0;i<cities_sorted.length;i++) {
+    var key = cities_sorted[i];
+    // check if the property/key is defined in the object itself, not in parent
+    if (cities.hasOwnProperty(key)) {           
+        //console.log(key, cities[key].length);
+        makeCity(key,cities[key]);
+    }
+}
+
+
+
+
+
+});
+
+
+
+
+</script>
+
+
+</body>
+</html>
