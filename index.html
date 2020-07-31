@@ -158,7 +158,7 @@
 <div class="about">
 
 <h1>akcovid.info: Covid-19 Testing Locations in Alaska</h1>
-  <span style="background-color:red;color:white;">State of Alaska datafeed is down as of 7-31-2020 12PM AKST. </span>
+  <span style="background-color:red;color:white;">State of Alaska datafeed is being updated as of 7-31-2020 12PM AKST. </span><br>
     About this site: The State of Alaska maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
     This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. If you have feedback please <a href="mailto:jared.chandler@gmail.com">send email</a>. 
 </div>
@@ -362,7 +362,8 @@ function clinic(cities,fields,geo){
 };
  
 var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=name_of_collection_site,address,city,zipcode,sunday,hours_open,monday,hours_open_monday,tuesday,hours_open_tuesday,wednesday,hours_open_wednesday,thursday,hours_open_thursday,friday,hours_open_friday,saturday,hours_open_saturday,public_contact_number_if_availa,public_e_mail_for_site_informat,medical_referral_needed,cost,cost_other,rapid_testing,RapidCapacity,RapidCapUKnw,urgent_testing,UrgentCapacity,UrgentCapUknw,private_testing_collection,PrivateCapacity,PrivateCapUknw,additional_notes,AcceptsVoucher&outSR=4326&f=json';
-c = $.getJSON( url, function( data ) {
+var ulr = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
+  c = $.getJSON( url, function( data ) {
   var cities = {};
   var items = [];
   $.each( data.features, function( key, val ) {
