@@ -79,6 +79,11 @@
     padding-bottom:1em;
    
    }
+
+   .notes{
+
+    max-width:500px;
+   }
 /*   .clinic * {
    
    display:none;
@@ -157,10 +162,10 @@
 
 <div class="about">
 
-<h1>akcovid.info: Covid-19 Testing Locations in Alaska</h1>
+<h1><span>akcovid.info</span> Covid-19 Testing Locations in Alaska</h1>
   <span style="background-color:red;color:white;">State of Alaska datafeed is being updated as of 7-31-2020 12PM AKST. </span><br>
     About this site: The State of Alaska maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
-    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. If you have feedback please <a href="mailto:jared.chandler@gmail.com">send email</a>. 
+    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. If you have feedback please <a href="mailto:admin@akcovid.info">send email</a>. 
 </div>
 
 <div id="citylinks">
@@ -174,6 +179,18 @@
 </div>
 
 <script>
+
+
+  function cleanCity(city){
+    var city = city;
+    var remove = ', AK';
+    //console.log(city);
+    city = city.replace('ANVSA, AK, USA','')
+    city = city.replace(', AK','');
+    city = city.replace(', Ak','');
+    //console.log("replaced",city);
+    return city;
+  }
 
     $(function() {
     $("#menu").change(function() {
@@ -262,7 +279,7 @@ var template = `<div class='clinic'>
 <div>Phone: `+tel(lu('public_contact_number_if_availa'))+`</div>
 <div>Email: `+email(lu('public_e_mail_for_site_informat'))+`</div>
 
-<div>Address: `+lu('address')+` `+lu('city')+` AK `+lu('zipcode')+`</a></div>
+<div>Address: `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</a></div>
 <br/>
 <div><em>Hours</em></div>
 
@@ -277,7 +294,7 @@ var template = `<div class='clinic'>
 <div>Medical Referral Needed: `+lu('medical_referral_needed')+`</div>
 <div>Accepts Voucher: `+lu('AcceptsVoucher')+`</div>
 <br/>
-<div>Notes: `+lu('additional_notes')+`</div>
+<div class='notes'>Notes: `+lu('additional_notes')+`</div>
 <div>Costs: `+lu('costs')+` `+lu('costs_other')+`</div>
 
 </div>
@@ -321,12 +338,19 @@ function makeClinic(clinic){
 
 
 function makeCity(city,xs){
+     var city = cleanCity(city);
     var links = $('<a name="'+city+'" /><a name="'+city.toLowerCase()+'"/>');
     var link = $('<a href="#'+city.toLowerCase()+'">'+city+'</a>');
-    var option = $('<option value="'+city.toLowerCase()+'">'+city+'</option>');
+    var option = $('<option value="'+city.toLowerCase()+'">'+city+ '('+xs.length+')'+'</option>');
     option.appendTo($("#menu")[0]);
     link.appendTo($('#citylinks')[0]);
-    var cityElement = $('<div class="City"><h2>'+city+'</h2></div>');
+ 
+    if (xs.length>1){
+      var qtytestinglocation =  xs.length + ' locations';
+    } else {
+      var qtytestinglocation =  xs.length + ' location';
+    }
+    var cityElement = $('<div class="City"><h2>'+city+ ' : '+qtytestinglocation+'</h2></div>');
     
     //console.log(xs);
     for (var i = 0;i<xs.length;i++){
