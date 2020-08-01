@@ -36,8 +36,8 @@
    }
 
    h1 {
-    color:blue;
-    background-color: gold;
+    color:gold;
+    background-color: blue;
     display:block;
     padding:10px;
    }
@@ -71,13 +71,25 @@
    }
 
    #menubox, #menu {
-    font-size:1.5em;
+/*    font-size:1.5em;*/
+border-color: 1px solid green;
+font-size: 1.25em;
 
+   }
+
+#menubox {
+    background-color: lightgreen;
+    font-weight: bold;
+   }
+
+   select{
+    font-size: 1.25em;
    }
 
 
    .about {
     padding-bottom:1em;
+    max-width: 600px;
    
    }
 
@@ -160,23 +172,38 @@
 
 <body>
 
+<h1><span>akcovid.info</span> Covid-19 Testing Locations in Alaska</h1>
 
 <div class="about">
 
-<h1><span>akcovid.info</span> Covid-19 Testing Locations in Alaska</h1>
+
+
+
+
+
+<div style="padding:10px;font-weight: bold;">
+Anyone with any symptom of COVID-19 should get tested as soon as possible.
+  <br>
+<img style="max-width: 500px;padding:4px;" src="https://dhss.alaska.gov/dph/Epi/id/PublishingImages/COVID-19/symptomlist.png"><br>
+  If you feel sick and have reason to believe you have COVID-19 <em style="color:red;">do not go to a clinic or hospital without first calling ahead </em>. Calling first will help the clinic or hospital prepare to greet you and take care of you in the safest possible way. 
+</div>
 <!--   <span style="background-color:red;color:white;">This data is retrieved from the Alaska DHSS Covid Testing Sites page. </span><br> -->
-    About this site: The <a href="http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx">State of Alaska DHSS</a> maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
-    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. If you have feedback please <a href="mailto:admin@akcovid.info">send email</a>. 
+  
 </div>
 
 <div id="citylinks">
-    <h2>Choose your community<h2>
+    <h2>Choose your community</h2>
 </div>
 
-<div id="menubox">
+<div class="menubox" id="menubox" style="background-color: lightgreen;padding:5px;">
     View Testing Location For:  <select id="menu">
         <option>Choose Your Community</option>
-    </select>
+    </select> &larr;&larr;&larr;
+</div>
+
+<div>
+   <br><em>About this page:</em> The <a href="http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx">State of Alaska DHSS</a> maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
+    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. <a href="mailto:admin@akcovid.info"> Send feedback here</a>. 
 </div>
 
 <script>
