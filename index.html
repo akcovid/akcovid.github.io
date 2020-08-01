@@ -1,9 +1,10 @@
 
 <html>
-<title>Alaska Covid-19 Testing Locations</title>
+
 
 <head>
-
+  <meta name="Description" CONTENT="Alaska Covid-19 Testing Locations - Find a testing location by Alaska Community">
+<title>Alaska Covid-19 Testing Locations</title>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70817-22"></script>
 <script>
@@ -163,8 +164,8 @@
 <div class="about">
 
 <h1><span>akcovid.info</span> Covid-19 Testing Locations in Alaska</h1>
-  <span style="background-color:red;color:white;">State of Alaska datafeed is being updated as of 7-31-2020 12PM AKST. </span><br>
-    About this site: The State of Alaska maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
+<!--   <span style="background-color:red;color:white;">This data is retrieved from the Alaska DHSS Covid Testing Sites page. </span><br> -->
+    About this site: The <a href="http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx">State of Alaska DHSS</a> maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
     This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. If you have feedback please <a href="mailto:admin@akcovid.info">send email</a>. 
 </div>
 
@@ -341,7 +342,12 @@ function makeCity(city,xs){
      var city = cleanCity(city);
     var links = $('<a name="'+city+'" /><a name="'+city.toLowerCase()+'"/>');
     var link = $('<a href="#'+city.toLowerCase()+'">'+city+'</a>');
-    var option = $('<option value="'+city.toLowerCase()+'">'+city+ '('+xs.length+')'+'</option>');
+    if (xs.length > 1){
+        var option = $('<option value="'+city.toLowerCase()+'">'+city+ '('+xs.length+')'+'</option>');
+    } else {
+          var option = $('<option value="'+city.toLowerCase()+'">'+city+ '</option>');
+    }
+
     option.appendTo($("#menu")[0]);
     link.appendTo($('#citylinks')[0]);
  
@@ -350,8 +356,11 @@ function makeCity(city,xs){
     } else {
       var qtytestinglocation =  xs.length + ' location';
     }
+  if (xs.length > 1){
     var cityElement = $('<div class="City"><h2>'+city+ ' : '+qtytestinglocation+'</h2></div>');
-    
+    } else {
+      var cityElement = $('<div class="City"><h2>'+city+ '</h2></div>'); 
+    }
     //console.log(xs);
     for (var i = 0;i<xs.length;i++){
         clinic = xs[i];
