@@ -299,9 +299,9 @@ function tel(x){
     }
 }
 
-function labelpair(label,value){
-  if (value != ''){
-    return '<div>'+label+': ' + value + '</div>'
+function labelPair(label,value){
+  if (value.trim() != ''){
+    return '<div>'+label+': ' + value + '</div>';
   } else {
     return '';
   }
@@ -313,7 +313,7 @@ var template = `<div class='clinic'>
 
 
 <div>Phone: `+tel(lu('public_contact_number_if_availa'))+`</div>
-<div>Email: `+email(lu('public_e_mail_for_site_informat'))+`</div>
+`+labelPair('Email',email(lu('public_e_mail_for_site_informat')))+`
 
 <div>Address: `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</div>
 <br/>
@@ -331,8 +331,7 @@ var template = `<div class='clinic'>
 <div>Accepts Voucher: `+lu('AcceptsVoucher')+`</div>
 <br/>
 <div class='notes'>Notes: `+lu('additional_notes')+`</div>
-<div>Costs: `+lu('costs')+` `+lu('costs_other')+`</div>
-
+`+labelPair("Costs",lu('costs')+` `+lu('costs_other')) + `
 </div>
 `;  
 
