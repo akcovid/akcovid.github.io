@@ -311,8 +311,7 @@ var template = `<div class='clinic'>
 <h3 >`+lu('name_of_collection_site')+`</h3>
 
 
-
-<div>Phone: `+tel(lu('public_contact_number_if_availa'))+`</div>
+`+labelPair('Phone',tel(lu('public_contact_number_if_availa')))+`
 `+labelPair('Email',email(lu('public_e_mail_for_site_informat')))+`
 
 <div>Address: `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</div>
@@ -330,7 +329,7 @@ var template = `<div class='clinic'>
 <div>Medical Referral Needed: `+lu('medical_referral_needed')+`</div>
 <div>Accepts Voucher: `+lu('AcceptsVoucher')+`</div>
 <br/>
-<div class='notes'>Notes: `+lu('additional_notes')+`</div>
+`+labelPair("Notes",lu('costs')+` `+lu('additional_notes')) + `
 `+labelPair("Costs",lu('costs')+` `+lu('costs_other')) + `
 </div>
 `;  
