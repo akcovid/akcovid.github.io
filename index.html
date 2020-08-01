@@ -299,6 +299,14 @@ function tel(x){
     }
 }
 
+function labelpair(label,value){
+  if (value != ''){
+    return '<div>'+label+': ' + value + '</div>'
+  } else {
+    return '';
+  }
+}
+
 var template = `<div class='clinic'>
 <h3 >`+lu('name_of_collection_site')+`</h3>
 
@@ -307,7 +315,7 @@ var template = `<div class='clinic'>
 <div>Phone: `+tel(lu('public_contact_number_if_availa'))+`</div>
 <div>Email: `+email(lu('public_e_mail_for_site_informat'))+`</div>
 
-<div>Address: `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</a></div>
+<div>Address: `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</div>
 <br/>
 <div><em>Hours</em></div>
 
