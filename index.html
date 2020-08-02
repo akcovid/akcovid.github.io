@@ -36,17 +36,28 @@
    }
 
    h1 {
-    color:white;
+    color:gold;
     background-color: blue;
     display:block;
     padding:10px;
     font-size:1.25em;
+     vertical-align: baseline;
+   }
+
+   h1 #opennew {
+    font-size:.8em;
+    color:lightblue;
+    font-weight: normal;
+/*    vertical-align: baseline;*/
    }
 
    h1 a {
-    color:gold;
+    color:white;
     text-decoration: none;
 
+   }
+   h1 span {
+    color:lightblue;
    }
    h1 a:hover {
     text-decoration: underline;
@@ -99,13 +110,18 @@ font-size: 1.25em;
 
    .about {
     padding-bottom:1em;
-    max-width: 600px;
+    max-width: 670px;
+    /*border:1px solid red;*/
    
    }
 
    .notes{
 
     max-width:500px;
+   }
+
+   #opennew {
+    float:right;
    }
 /*   .clinic * {
    
@@ -182,7 +198,7 @@ font-size: 1.25em;
 
 <body>
 
-<h1><a id="sitelink" target="_blank" href="https://akcovid.info">akcovid.info</a> Covid-19 Testing Locations in Alaska</h1>
+<h1><a id="sitelink" target="_blank" href="https://akcovid.info">akcovid.info</a> <span>|</span> Covid-19 Testing Sites in Alaska <a id="opennew" target="_new" href="https://akcovid.info">Open In New Window</a></h1>
 
 <div class="about">
 
@@ -191,10 +207,10 @@ font-size: 1.25em;
 
 
 
-<div style="padding:10px;font-weight: bold;">
+<div style="padding:5px;font-weight: bold;">
   Anyone with any symptom of COVID-19 should get tested as soon as possible.
   <br>
-<img style="max-width: 500px;padding:4px;" src="symptomlist.png"><br>
+<img style="max-width: 500px;padding:2px;" src="symptomlist.png"><br>
   If you feel sick and have reason to believe you have COVID-19 <em style="color:red;">do not go to a clinic or hospital without first calling ahead </em>. Calling first will help the clinic or hospital prepare to greet you and take care of you in the safest possible way. 
 </div>
 <!--   <span style="background-color:red;color:white;">This data is retrieved from the Alaska DHSS Covid Testing Sites page. </span><br> -->
@@ -206,14 +222,14 @@ font-size: 1.25em;
 </div>
 
 <div class="menubox" id="menubox" style="background-color: lightgreen;padding:5px;">
-    View Testing Locations For:  <select id="menu">
+    View Testing Sites For:  <select id="menu">
         <option>Choose Your Community</option>
     </select> &larr;&larr;&larr;
 </div>
 
 <div id="abouttext">
-   <br><em>About this page:</em> The <a href="https://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx">State of Alaska DHSS</a> maintains testing location data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
-    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">here</a> in real time and displays it broken down by community and testing location. <a href="mailto:admin@akcovid.info"> Send feedback here</a>. 
+   <br><em>About this page:</em> The <a href="https://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx">State of Alaska DHSS</a> maintains testing site data as a <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/app/2d92b77bc8044329a1ee3954b063bd8c">Map</a>.
+    This page retrieves data from <a href="https://coronavirus-response-alaska-dhss.hub.arcgis.com/datasets/testing-sites-public-view/data?geometry=10.547%2C-88.438%2C-10.547%2C88.438">DHSS</a> in real time and displays it broken down by community and testing site. <a href="mailto:admin@akcovid.info">Have feedback?</a>. 
 </div>
 
 <script>
@@ -231,12 +247,17 @@ $('#sitelink').each(function() {
     $(this).attr('target', '_top');       
 });
 
+
 } else {
 
 
   $('#sitelink').each(function() {        
     $(this).attr('target', '_self');       
 });
+$('#opennew').each(function() {
+ $(this).hide();
+});
+
 }
 
 
@@ -424,9 +445,9 @@ function makeCity(city,xs){
     link.appendTo($('#citylinks')[0]);
  
     if (xs.length>1){
-      var qtytestinglocation =  xs.length + ' locations';
+      var qtytestinglocation =  xs.length + ' sites';
     } else {
-      var qtytestinglocation =  xs.length + ' location';
+      var qtytestinglocation =  xs.length + ' site';
     }
   if (xs.length > 1){
     var cityElement = $('<div class="City"><h2>'+city+ ' : '+qtytestinglocation+'</h2></div>');
