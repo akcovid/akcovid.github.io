@@ -99,13 +99,18 @@ font-size: 1.25em;
 
    .about {
     padding-bottom:1em;
-    max-width: 600px;
+    max-width: 670px;
+    /*border:1px solid red;*/
    
    }
 
    .notes{
 
     max-width:500px;
+   }
+
+   #opennew {
+    float:right;
    }
 /*   .clinic * {
    
@@ -185,7 +190,7 @@ font-size: 1.25em;
 <h1><a id="sitelink" target="_blank" href="https://akcovid.info">akcovid.info</a> Covid-19 Testing Locations in Alaska</h1>
 
 <div class="about">
-
+<a id="opennew" target="_new" href="https://akcovid.info">Open In New Window</a>
 
 
 
@@ -231,12 +236,17 @@ $('#sitelink').each(function() {
     $(this).attr('target', '_top');       
 });
 
+
 } else {
 
 
   $('#sitelink').each(function() {        
     $(this).attr('target', '_self');       
 });
+$('#opennew').each(function() {
+ $(this).hide();
+});
+
 }
 
 
