@@ -81,6 +81,35 @@
 
 
 
+   .clinic div {
+    display: flex;
+    align-items: stretch;
+
+   }
+   .clinic div span {
+    flex-basis:30%;
+        font-weight:bold;
+    /*display:flex;*/
+    
+   }
+
+   .clinic div span.hours {
+    flex-basis:20%;
+    margin-left:10px;
+    /*display:flex;*/
+   }
+
+      .clinic div span.short {
+    flex-basis:20%;
+   
+    /*display:flex;*/
+   }
+
+
+      .clinic div span.wide {
+    flex-basis:40%;
+   }
+
    #citylinks a {
     margin-right:15px;
    
@@ -361,7 +390,7 @@ function tel(x){
 
 function labelPair(label,value){
   if (value.trim() != ''){
-    return '<div>'+label+': ' + value + '</div>';
+    return '<div>'+label+' ' + value + '</div>';
   } else {
     return '';
   }
@@ -371,26 +400,26 @@ var template = `<div class='clinic'>
 <h3 >`+lu('name_of_collection_site')+`</h3>
 
 
-`+labelPair('Phone',tel(lu('public_contact_number_if_availa')))+`
-`+labelPair('Email',email(lu('public_e_mail_for_site_informat')))+`
+`+labelPair('<span class="short">Phone:</span>',tel(lu('public_contact_number_if_availa')))+`
+`+labelPair('<span class="short">Email:</span>',email(lu('public_e_mail_for_site_informat')))+`
 
-<div>Address: `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</div>
+<div><span class="short">Address:</span> `+lu('address')+` `+cleanCity(lu('city'))+` AK `+lu('zipcode')+`</div>
 <br/>
 <div><em>Hours</em></div>
 
-<div><span>Monday:</span> `+lu('monday')+` `+lu('hours_open_monday')+`</div>
-<div><span>Tuesday:</span> `+lu('tuesday')+` `+lu('hours_open_tuesday')+`</div>
-<div><span>Wednesday:</span> `+lu('wednesday')+` `+lu('hours_open_wednesday')+`</div>
-<div><span>Thursday:</span> `+lu('thursday')+` `+lu('hours_open_thursday')+`</div>
-<div><span>Friday:</span> `+lu('friday')+` `+lu('hours_open_friday')+`</div>
-<div><span>Saturday:</span> `+lu('saturday')+` `+lu('hours_open_saturday')+`</div>
-<div><span>Sunday:</span> `+lu('sunday')+` `+lu('hours_open_sunday')+`</div>
+<div><span class='hours'>Monday:</span> `+lu('monday')+` `+lu('hours_open_monday')+`</div>
+<div><span class='hours'>Tuesday:</span> `+lu('tuesday')+` `+lu('hours_open_tuesday')+`</div>
+<div><span class='hours'>Wednesday:</span> `+lu('wednesday')+` `+lu('hours_open_wednesday')+`</div>
+<div><span class='hours'>Thursday:</span> `+lu('thursday')+` `+lu('hours_open_thursday')+`</div>
+<div><span class='hours'>Friday:</span> `+lu('friday')+` `+lu('hours_open_friday')+`</div>
+<div><span class='hours'>Saturday:</span> `+lu('saturday')+` `+lu('hours_open_saturday')+`</div>
+<div><span class='hours'>Sunday:</span> `+lu('sunday')+` `+lu('hours_open_sunday')+`</div>
 <br/>
-<div>Medical Referral Needed: `+lu('medical_referral_needed')+`</div>
-<div>Accepts Voucher: `+lu('AcceptsVoucher')+`</div>
+<div><span class='wide'>Medical Referral Needed:</span> `+lu('medical_referral_needed')+`</div>
+<div><span class='wide'>Accepts Voucher:</span> `+lu('AcceptsVoucher')+`</div>
 <br/>
-`+labelPair("Notes",lu('costs')+` `+lu('additional_notes')) + `
-`+labelPair("Costs",lu('costs')+` `+lu('costs_other')) + `
+`+labelPair("<span>Notes:</span>",lu('costs')+` `+lu('additional_notes')) + `
+`+labelPair("<span>Costs:</span>",lu('costs')+` `+lu('costs_other')) + `
 </div>
 `;  
 
