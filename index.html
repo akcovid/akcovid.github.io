@@ -490,7 +490,8 @@ function clinic(cities,fields,geo){
  
 var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=name_of_collection_site,address,city,zipcode,sunday,hours_open,monday,hours_open_monday,tuesday,hours_open_tuesday,wednesday,hours_open_wednesday,thursday,hours_open_thursday,friday,hours_open_friday,saturday,hours_open_saturday,public_contact_number_if_availa,public_e_mail_for_site_informat,medical_referral_needed,cost,cost_other,rapid_testing,RapidCapacity,RapidCapUKnw,urgent_testing,UrgentCapacity,UrgentCapUknw,private_testing_collection,PrivateCapacity,PrivateCapUknw,additional_notes,AcceptsVoucher&outSR=4326&f=json';
 var ulr = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json'
-  c = $.getJSON( url, function( data ) {
+var url = 'data.json';
+c = $.getJSON( url, function( data ) {
   var cities = {};
   var items = [];
   $.each( data.features, function( key, val ) {
