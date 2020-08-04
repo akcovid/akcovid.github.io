@@ -523,7 +523,7 @@ function afterLoad(data){
 
 }
 
-var url = 'xhttps://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
+var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
 //var url = 'x';
   c = $.getJSON( url, function( data ) {
         afterLoad(data);
@@ -531,7 +531,7 @@ var url = 'xhttps://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/T
     }).fail(function() {
     //alert( "error" );
           //alert("unable to load from SOA");
-          c = $.getJSON( './daxta.json', function( data ) {
+          c = $.getJSON( './data.json', function( data ) {
                 afterLoad(data);
                 $("#menuboxloading").slideUp();
                 $("#menuboxsoa").slideDown();
