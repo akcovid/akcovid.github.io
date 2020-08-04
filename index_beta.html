@@ -531,7 +531,7 @@ var url = 'xhttps://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/T
     }).fail(function() {
     //alert( "error" );
           //alert("unable to load from SOA");
-          c = $.getJSON( './data.json', function( data ) {
+          c = $.getJSON( './daxta.json', function( data ) {
                 afterLoad(data);
                 $("#menuboxloading").slideUp();
                 $("#menuboxsoa").slideDown();
