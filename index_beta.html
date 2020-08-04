@@ -394,9 +394,9 @@ function makeCity(city,xs){
       var qtytestinglocation =  xs.length + ' site';
     }
   if (xs.length > 1){
-    var cityElement = $('<div class="City"><h2>'+city+ ' : '+qtytestinglocation+'<a class="opennew" target="_new" href=#'+city.toLowerCase()+'>Open In New Window</a></h2></div>');
+    var cityElement = $('<div class="City"><h2>'+city+ ' : '+qtytestinglocation+'</h2></div>');
     } else {
-      var cityElement = $('<div class="City"><h2>'+city+ '<a class="opennew" target="_new" href=#'+city.toLowerCase()+'>Open In New Window</a></h2></div>'); 
+      var cityElement = $('<div class="City"><h2>'+city+ '</div>'); 
     }
     //console.log(xs);
     xs.sort((a, b) => (a.name_of_collection_site.toLowerCase() > b.name_of_collection_site.toLowerCase()) ? 1 : -1)
