@@ -206,7 +206,7 @@ Unable to load Testing Site Data from State of Alaska or Cached Copy. Please try
 <div class="menubox" id="menubox" style="background-color: lightgreen;padding:5px;">
     View Testing Sites For:  <select id="menu">
         <option>Choose Your Community</option>
-    </select> &larr;&larr;&larr;
+    </select>
 </div>
 
 <div id="abouttext">
@@ -455,7 +455,7 @@ function dataCleanup(val){
       val.attributes.city = cleanCity(val.attributes.city);
     } else {
       console.log("undefined val attrs");
-      console.log(val);
+      //console.log(val);
     }
     //
     return val;
@@ -466,7 +466,7 @@ function afterLoad(data){
 
         var cities = {};
         var items = [];
-        console.log('data',data);
+        //console.log('data',data);
         // $.each(data,function(key,val){
         //   console.log(key,val);
         // });
