@@ -248,6 +248,7 @@ function inIframe () {
 
     $(function() {
     $("#menu").change(function() {
+        ga('send', 'event', 'search', 'changed', 'selectcity');
         location.hash = "" + $(this).find("option:selected")[0].value;
     });
 });
