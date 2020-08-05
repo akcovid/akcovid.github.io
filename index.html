@@ -1,7 +1,5 @@
 
 <html>
-
-
 <head>
   <meta name="Description" CONTENT="Alaska COVID-19 Testing Sites - Find a COVID-19 testing site by Alaska Community">
 <title>Alaska COVID-19 Testing Sites</title>
@@ -165,8 +163,8 @@ font-size: 1.25em;
 </head>
 
 <body>
-
-<h1><a id="sitelink" target="_blank" href="https://akcovid.info">akcovid.info</a> <span>|</span> COVID-19 Testing Sites in Alaska <a class="opennew" target="_new" href="https://akcovid.info"><img src="Maximise.svg">Enlarge</a></h1>
+<a name="enlarge" />
+<h1><a id="sitelink" target="_blank" href="https://akcovid.info">akcovid.info</a> <span>|</span> COVID-19 Testing Sites in Alaska <a class="opennew" target="_new" href="https://akcovid.info/#enlarge"><img src="Maximise.svg">Enlarge</a></h1>
 
 <div class="about">
 
@@ -196,7 +194,7 @@ font-size: 1.25em;
 </div>
 
 <div class="menubox" id="menuboxsoa" style="border:3px solid orange;padding:5px;display:none;">
-Unable to load Testing Site Data from State of Alaska. Using Cached Copy Instead.
+Slow to load Testing Site Data from State of Alaska. Using Cached Copy Instead.
 </div>
 
 <div class="menubox" id="menuboxfail" style="border:3px solid orange;padding:5px;background-color:orange;display:none;">
@@ -215,6 +213,10 @@ Unable to load Testing Site Data from State of Alaska or Cached Copy. Please try
 </div>
 
 <script>
+
+
+
+
 
 function inIframe () {
     try {
@@ -250,6 +252,7 @@ function inIframe () {
 
     $(function() {
     $("#menu").change(function() {
+
         location.hash = "" + $(this).find("option:selected")[0].value;
     });
 });
@@ -522,8 +525,11 @@ function afterLoad(data){
 
 }
 
+$.ajaxSetup({
+    timeout: 2000 //Time in milliseconds
+});
+
 var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
-var url = './data.json';
 //var url = 'x';
   c = $.getJSON( url, function( data ) {
         afterLoad(data);
