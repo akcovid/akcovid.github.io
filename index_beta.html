@@ -500,6 +500,19 @@ function afterLoad(data){
 
         $(document).ready(function(){
 
+
+
+
+
+
+
+
+
+
+
+
+
+
           if (inIframe()){
               $('#sitelink').each(function() {        
                   $(this).attr('target', '_top');       
@@ -522,6 +535,44 @@ function afterLoad(data){
 
         }
 
+        // do everything in document ready
+
+              $.ajaxSetup({
+                  timeout: 2000 //Time in milliseconds
+              });
+
+              ga('create', 'UA-70817-22', 'auto');
+
+              var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
+              //var url = 'x';
+                c = $.getJSON( url, function( data ) {
+                      afterLoad(data);
+                      $("#menuboxloading").slideUp();
+                      ga('send', 'event', 'load', 'json', 'soa');
+                  }).fail(function() {
+                  //alert( "error" );
+                        //alert("unable to load from SOA");
+                        c = $.getJSON( './data.json', function( data ) {
+                              afterLoad(data);
+                              $("#menuboxloading").slideUp();
+                              $("#menuboxsoa").slideDown();
+                              ga('send', 'event', 'load', 'json', 'cache');
+                              //alert("loaded from json");
+                          }).fail(function() {
+
+                              $("#menuboxloading").slideUp();
+                              $("#menuboxfail").slideDown();
+                              $("#menubox").slideUp();
+                              ga('send', 'event', 'load', 'json', 'fail');
+                          //alert( "error" );   
+
+                          });
+
+
+
+                  });
+
+
         
 
         });
@@ -530,40 +581,6 @@ function afterLoad(data){
 
 }
 
-$.ajaxSetup({
-    timeout: 2000 //Time in milliseconds
-});
-
-ga('create', 'UA-70817-22', 'auto');
-
-var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
-//var url = 'x';
-  c = $.getJSON( url, function( data ) {
-        afterLoad(data);
-        $("#menuboxloading").slideUp();
-        ga('send', 'event', 'load', 'json', 'soa');
-    }).fail(function() {
-    //alert( "error" );
-          //alert("unable to load from SOA");
-          c = $.getJSON( './data.json', function( data ) {
-                afterLoad(data);
-                $("#menuboxloading").slideUp();
-                $("#menuboxsoa").slideDown();
-                ga('send', 'event', 'load', 'json', 'cache');
-                //alert("loaded from json");
-            }).fail(function() {
-
-                $("#menuboxloading").slideUp();
-                $("#menuboxfail").slideDown();
-                $("#menubox").slideUp();
-                ga('send', 'event', 'load', 'json', 'fail');
-            //alert( "error" );   
-
-            });
-
-
-
-    });
 
 
 
