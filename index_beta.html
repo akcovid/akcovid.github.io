@@ -16,7 +16,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script> -->
 
-
+<script>
+  ga('create', 'UA-70817-22', 'auto');
+</script>
 <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
@@ -252,8 +254,14 @@ function inIframe () {
 
     $(function() {
     $("#menu").change(function() {
-
+        var city = $(this).find("option:selected")[0].value;
         location.hash = "" + $(this).find("option:selected")[0].value;
+
+        ga('send', 'event', 'search', 'chose', 'https://akvoid.info', {
+        nonInteraction: true
+        });
+        ga('send', 'event', 'search', 'city', city);
+
     });
 });
 
