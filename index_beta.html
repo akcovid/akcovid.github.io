@@ -254,10 +254,6 @@ function inIframe () {
     $("#menu").change(function() {
         var city = $(this).find("option:selected")[0].value;
         location.hash = "" + $(this).find("option:selected")[0].value;
-
-        ga('send', 'event', 'search', 'chose', 'https://akvoid.info', {
-        nonInteraction: true
-        });
         ga('send', 'event', 'search', 'city', city);
 
     });
@@ -508,6 +504,7 @@ function afterLoad(data){
               $('#sitelink').each(function() {        
                   $(this).attr('target', '_top');       
               });
+              ga('send', 'event', 'pageload', 'inframe', 'inframe');
 
 
           } else {
@@ -520,6 +517,8 @@ function afterLoad(data){
               $('.opennew').each(function() {
                 $(this).hide();
               });
+
+              ga('send', 'event', 'pageload', 'noframe', 'noframe');
 
         }
 
@@ -542,6 +541,7 @@ var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Te
   c = $.getJSON( url, function( data ) {
         afterLoad(data);
         $("#menuboxloading").slideUp();
+        ga('send', 'event', 'load', 'json', 'soa');
     }).fail(function() {
     //alert( "error" );
           //alert("unable to load from SOA");
@@ -549,12 +549,14 @@ var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Te
                 afterLoad(data);
                 $("#menuboxloading").slideUp();
                 $("#menuboxsoa").slideDown();
+                ga('send', 'event', 'load', 'json', 'cache');
                 //alert("loaded from json");
             }).fail(function() {
 
                 $("#menuboxloading").slideUp();
                 $("#menuboxfail").slideDown();
                 $("#menubox").slideUp();
+                ga('send', 'event', 'load', 'json', 'fail');
             //alert( "error" );   
 
             });
