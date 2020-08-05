@@ -16,9 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script> -->
 
-<script>
-  ga('create', 'UA-70817-22', 'auto');
-</script>
+
 <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
@@ -536,6 +534,8 @@ function afterLoad(data){
 $.ajaxSetup({
     timeout: 2000 //Time in milliseconds
 });
+
+ga('create', 'UA-70817-22', 'auto');
 
 var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
 //var url = 'x';
