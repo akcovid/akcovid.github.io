@@ -215,7 +215,7 @@ Unable to load Testing Site Data from State of Alaska or Cached Copy. Please try
 <script>
 
 
-ga('send', 'event', 'Videos', 'play', 'Fall Campaign');
+
 
 
 function inIframe () {
@@ -252,7 +252,7 @@ function inIframe () {
 
     $(function() {
     $("#menu").change(function() {
-        ga('send', 'event', 'search', 'changed', 'selectcity');
+
         location.hash = "" + $(this).find("option:selected")[0].value;
     });
 });
@@ -524,6 +524,10 @@ function afterLoad(data){
 
 
 }
+
+$.ajaxSetup({
+    timeout: 2000 //Time in milliseconds
+});
 
 var url = 'https://services1.arcgis.com/WzFsmainVTuD5KML/arcgis/rest/services/Testing_Sites_Public_View/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json';
 //var url = 'x';
